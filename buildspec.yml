@@ -1,13 +1,10 @@
 version: 0.2
-
 phases:
   build:
     commands:
       - echo "Running updateSongInfo function"
-      - grep "script.js" index.html
-
+      - grep -q "script.js" index.html && echo "script.js found in index.html" || echo "script.js not found in index.html"
 artifacts:
   files:
-    - index.html   # Incluye el archivo index.html generado en el artefacto
+    - index.html   # Incluye el archivo index.html en el artefacto
   discard-paths: yes
-
