@@ -1,18 +1,15 @@
 version: 0.2
-
 phases:
   build:
     commands:
       - echo "Running build phase"
-      - type index.html
-
   post_build:
     commands:
       - echo "Running test phase"
       - |
         $errors = @()
         
-        if (-not (Test-Path -Path "Images/image9.png")) {
+        if (-not (Test-Path -Path "Images/image1.png")) {
           $errors += "Error: Images/image1.png not found"
         }
         
@@ -27,7 +24,6 @@ phases:
         } else {
           echo "All checks passed successfully"
         }
-
 artifacts:
   files:
     - '**/*'
