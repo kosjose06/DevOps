@@ -9,15 +9,17 @@ phases:
   post_build:
     commands:
       - echo "Running test phase"
-      - if grep -q "<script src=\"script.js\"></script>" index.html; then
-          echo "script.js is correctly referenced in index.html";
+      - |
+        if grep -q "<script src=\"script.js\"></script>" index.html; then
+          echo "script.js is correctly referenced in index.html"
         else
-          echo "Error: script.js is not correctly referenced in index.html" && exit 1;
+          echo "Error: script.js is not correctly referenced in index.html" && exit 1
         fi
-      - if grep -q "<link rel=\"stylesheet\" href=\"style.css\">" index.html; then
-          echo "style.css is correctly referenced in index.html";
+      - |
+        if grep -q "<link rel=\"stylesheet\" href=\"style.css\">" index.html; then
+          echo "style.css is correctly referenced in index.html"
         else
-          echo "Error: style.css is not correctly referenced in index.html" && exit 1;
+          echo "Error: style.css is not correctly referenced in index.html" && exit 1
         fi
 
 artifacts:
