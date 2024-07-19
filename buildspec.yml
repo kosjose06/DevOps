@@ -4,23 +4,25 @@ phases:
   build:
     commands:
       - echo "Running build phase"
-      - cat index.html
+      - type index.html
 
   post_build:
     commands:
       - echo "Running test phase"
       - |
-        if grep -q "<script src=\"script.js\"></script>" index.html; then
+        if (Select-String -Path index.html -Pattern '<script src="script.js"></script>' -Quiet) {
           echo "script.js is correctly referenced in index.html"
-        else
-          echo "Error: script.js is not correctly referenced in index.html" && exit 1
-        fi
+        } else {
+          echo "Error: script.js is not correctly referenced in index.html"
+          exit 1
+        }
       - |
-        if grep -q "<link rel=\"stylesheet\" href=\"style.css\">" index.html; then
+        if (Select-String -Path index.html -Pattern '<link rel="stylesheet" href="style.css">' -Quiet) {
           echo "style.css is correctly referenced in index.html"
-        else
-          echo "Error: style.css is not correctly referenced in index.html" && exit 1
-        fi
+        } else {
+          echo "Error: style.css is not correctly referenced in index.html"
+          exit 1
+        }
 
 artifacts:
   files:
