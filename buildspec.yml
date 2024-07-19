@@ -10,21 +10,25 @@ phases:
     commands:
       - echo "Running test phase"
       - |
-        if (Select-String -Path index.html -Pattern '<script src="script.js"></script>' -Quiet) {
-          echo "script.js is correctly referenced in index.html"
-        } else {
-          echo "Error: script.js is not correctly referenced in index.html"
-          exit 1
+        $errors = @()
+        
+        if (-not (Test-Path -Path "Images/image1.png")) {
+          $errors += "Error: Images/image1.png not found"
         }
-      - |
-        if (Select-String -Path index.html -Pattern '<link rel="stylesheet" href="style.css">' -Quiet) {
-          echo "style.css is correctly referenced in index.html"
-        } else {
-          echo "Error: style.css is not correctly referenced in index.html"
+        
+        if (-not (Test-Path -Path "songs/Song4.mp3")) {
+          $errors += "Error: songs/Song4.mp3 not found"
+        }
+        
+        if ($errors.Count -gt 0) {
+          echo "Errors found:"
+          $errors | ForEach-Object { echo $_ }
           exit 1
+        } else {
+          echo "All checks passed successfully"
         }
 
 artifacts:
   files:
-    - index.html
-  discard-paths: yes
+    - '**/*'
+  discard-paths: no
