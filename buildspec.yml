@@ -12,7 +12,7 @@ phases:
       - |
         $errors = @()
         
-        if (-not (Test-Path -Path "Images/image1.png")) {
+        if (-not (Test-Path -Path "Images/image9.png")) {
           $errors += "Error: Images/image1.png not found"
         }
         
